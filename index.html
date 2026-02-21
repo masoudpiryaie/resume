@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masoud Piryaie Yarahmadi | Frontend Developer</title>
+  <meta name="description" content="Frontend Developer portfolio and resume - Masoud Piryaie Yarahmadi" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(148, 163, 184, 0.18);
+      --chip: rgba(56, 189, 248, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(1240px, 94%);
+      margin: 0 auto;
+      padding: 24px 0 60px;
+    }
+
+    /* ✅ changed from grid to flex to avoid equal height cards */
+    .hero {
+      display: flex;
+      gap: 24px;
+      margin-top: 18px;
+      align-items: flex-start;
+    }
+
+    .hero > .card:first-child { flex: 1.2; }
+    .hero > .card:last-child { flex: 0.8; }
+
+    .card {
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .name {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .title {
+      margin: 0;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .muted { color: var(--muted); }
+
+    .top-links {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section h2 {
+      font-size: 1.1rem;
+      margin: 0 0 12px;
+      color: #fff;
+      letter-spacing: 0.2px;
+    }
+
+    .section h2::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 3px;
+      margin-top: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .summary p {
+      margin: 0;
+      color: #dbeafe;
+      line-height: 1.75;
+    }
+
+    /* ===== New mini cards under About Me ===== */
+    .mini-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .mini-box {
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 14px;
+      background: rgba(2, 6, 23, 0.35);
+      padding: 12px;
+    }
+
+    .mini-box h3 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      color: #f8fafc;
+      line-height: 1.2;
+    }
+
+    .mini-box p {
+      margin: 0;
+      color: #dbe7f5;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .mini-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-chip {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.22);
+      color: #dcfce7;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .skill-box {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(2, 6, 23, 0.35);
+    }
+
+    .skill-box h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      color: #f8fafc;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: var(--chip);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #bae6fd;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: rgba(2, 6, 23, 0.35);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      font-weight: 800;
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .item-subtitle {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      margin-top: 2px;
+    }
+
+    .date {
+      color: #cfeeff;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .item p {
+      margin: 10px 0 12px;
+      color: #dbe7f5;
+      line-height: 1.75;
+      max-width: 88ch;
+    }
+
+    .item ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+
+    .item li {
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.65;
+      color: #cbd5e1;
+    }
+
+    .item li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .project-highlight {
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .project-links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: #fff;
+    }
+
+    .btn.primary {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .project-card {
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 45%),
+        rgba(2, 6, 23, 0.38);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 16px;
+      padding: 16px;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .project-card.featured {
+      border-color: rgba(34, 197, 94, 0.28);
+      background:
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.09), transparent 48%),
+        rgba(34, 197, 94, 0.04);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .project-title-wrap {
+      min-width: 0;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 0.76rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.65);
+      color: #dbeafe;
+    }
+
+    .project-desc {
+      margin: 8px 0 12px;
+      color: #dbe7f5;
+      line-height: 1.75;
+      max-width: 82ch;
+    }
+
+    .project-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .project-features li {
+      position: relative;
+      padding-left: 18px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .project-features li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+
+    .project-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(56,189,248,0.18), rgba(148,163,184,0.05));
+      margin: 10px 0 12px;
+      border-radius: 999px;
+    }
+
+    .project-card.compact .project-desc {
+      margin-bottom: 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(2, 6, 23, 0.35);
+    }
+
+    .info-box h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #f8fafc;
+    }
+
+    .soft-list, .interest-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .soft-list li,
+    .interest-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #d6e2f1;
+      line-height: 1.55;
+    }
+
+    .soft-list li::before,
+    .interest-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.95);
+    }
+
+    .music-box {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.22);
+    }
+
+    .music-box p {
+      margin: 0 0 8px;
+      color: #cfe0f5;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        flex-direction: column;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .name {
+        font-size: 1.6rem;
+      }
+      .item p,
+      .project-desc {
+        max-width: 100%;
+      }
+      .item ul,
+      .project-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <section class="hero">
+      <div class="card">
+        <h1 class="name">Masoud Piryaie Yarahmadi</h1>
+        <p class="title">Frontend Developer | React • Next.js • React Native</p>
+        <p class="muted">Berlin, Germany</p>
+
+        <div class="top-links">
+          <a class="pill" href="mailto:masoud.mpy@gmail.com">Email</a>
+          <a class="pill" href="https://www.linkedin.com/in/masoud-piryaie/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pill" href="https://github.com/masoudpiryaie" target="_blank" rel="noopener">GitHub</a>
+          <a class="pill" href="https://webisfree.net/" target="_blank" rel="noopener">Website</a>
+          <span class="pill">+49 157 55994405</span>
+        </div>
+
+        <div class="section summary">
+          <h2>About Me</h2>
+          <p>
+            Frontend Engineer with 5+ years of experience building web and mobile applications with React, Next.js, and React Native.
+            I focus on clean UI, performance, scalable architecture, and product thinking. I have experience in admin panels,
+            e-commerce platforms, mobile apps, and learning platforms, and I also collaborate well in full-stack teams with Firebase and modern web tools.
+          </p>
+
+          <!-- ✅ Added to reduce empty space and improve hero card -->
+          <div class="mini-grid">
+            <div class="mini-box">
+              <h3>Currently Building</h3>
+              <p>
+                ClubMate — an event-based social discovery app focused on helping people find event partners,
+                starting from Berlin with real-time matching, chat, and notifications.
+              </p>
+            </div>
+
+            <div class="mini-box">
+              <h3>Open To</h3>
+              <div class="mini-chips">
+                <span class="mini-chip">Frontend Roles</span>
+                <span class="mini-chip">React / Next.js</span>
+                <span class="mini-chip">React Native</span>
+                <span class="mini-chip">Product Teams</span>
+              </div>
+            </div>
+
+            <div class="mini-box">
+              <h3>Location & Availability</h3>
+              <p>
+                Based in Berlin, Germany. Open to on-site, hybrid, or remote collaboration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section">
+          <h2>Core Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-box">
+              <h3>Languages</h3>
+              <div class="chips">
+                <span class="chip">JavaScript</span>
+                <span class="chip">ECMAScript 6 (ES6)</span>
+                <span class="chip">TypeScript</span>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <h3>Frameworks / Libraries</h3>
+              <div class="chips">
+                <span class="chip">React.js</span>
+                <span class="chip">Next.js</span>
+                <span class="chip">React Native</span>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <h3>State Management</h3>
+              <div class="chips">
+                <span class="chip">Redux</span>
+                <span class="chip">Redux Toolkit</span>
+                <span class="chip">Redux-Saga</span>
+                <span class="chip">Redux-Thunk</span>
+                <span class="chip">Context API</span>
+                <span class="chip">Zustand</span>
+                <span class="chip">React Query</span>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <h3>Styling</h3>
+              <div class="chips">
+                <span class="chip">CSS</span>
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">Material UI</span>
+                <span class="chip">shadcn/ui</span>
+                <span class="chip">CSS-in-JS</span>
+                <span class="chip">Sass</span>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <h3>Testing</h3>
+              <div class="chips">
+                <span class="chip">Jest</span>
+                <span class="chip">React Testing Library</span>
+              </div>
+            </div>
+
+            <div class="skill-box">
+              <h3>CI / CD & Tools</h3>
+              <div class="chips">
+                <span class="chip">Git</span>
+                <span class="chip">GitHub</span>
+                <span class="chip">GitHub Actions</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">Firestore</span>
+                <span class="chip">Realtime DB</span>
+                <span class="chip">Cloudinary</span>
+                <span class="chip">Apify</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Languages</h2>
+          <p class="muted" style="margin:0;">
+            English: Fluent<br />
+            German: Intermediate (A2–B1 in progress)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Professional Experience</h2>
+
+      <div class="timeline">
+
+        <div class="item project-highlight">
+          <div class="item-header">
+            <div>
+              <div class="item-title">Frontend / Mobile App Developer — ClubMate</div>
+              <div class="item-subtitle">React Native • Event-based Social Discovery App • Berlin-focused Startup Product</div>
+            </div>
+            <div class="date">July 2025 – Present</div>
+          </div>
+          <p>
+            Building ClubMate, an event-based social and companion-finding mobile application designed to help people
+            find partners to attend events together. The product is focused on real-world event matching (starting from Berlin)
+            instead of traditional dating-only flows.
+          </p>
+          <ul>
+            <li>Developed the mobile app in React Native CLI with a user flow centered on event discovery, matching, and real-time interaction.</li>
+            <li>Built the backend services using Firebase, including Firestore database structure for app data, user relations, and core app tables.</li>
+            <li>Used Firebase Realtime Database for real-time chat features between matched users.</li>
+            <li>Implemented notification logic so users can see when their requests are accepted and stay updated on app activity.</li>
+            <li>Integrated low-cost media upload workflow using Cloudinary for user images and app media content.</li>
+            <li>Connected Apify-based event data pipelines to fetch and keep event listings updated.</li>
+            <li>Integrated Resident Advisor as the current ticket source for event-related ticket access.</li>
+            <li>Prepared the product architecture for future payment expansion (PayPal, Google Wallet, and credit/debit card support).</li>
+            <li>Managed app state using Context API for a simple and maintainable state management structure.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">Front-end Developer — Pardco</div>
+              <div class="item-subtitle">GS1-GTIN Admin Panel (on-site, full-time)</div>
+            </div>
+            <div class="date">Jul 2023 – Mar 2025</div>
+          </div>
+          <p>
+            Developed and improved the GS1 Admin Panel for data visualization, user management, and secure admin operations.
+            The platform supported large-scale code management (GLN/GTIN) and helped internal teams work faster and safer.
+          </p>
+          <ul>
+            <li>Improved a service system used by 100K+ users with real-time tracking capabilities.</li>
+            <li>Built 20+ responsive UI components using Material UI, Tailwind, and Zustand.</li>
+            <li>Integrated React Query to improve API data fetching and caching performance.</li>
+            <li>Developed admin dashboard modules with Kendo UI and Redux for real-time insights.</li>
+            <li>Implemented granular access control and secure session handling to strengthen security.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">React Native Android Developer — Hamiket</div>
+              <div class="item-subtitle">Multi-Vendor Mobile App (on-site, full-time)</div>
+            </div>
+            <div class="date">Apr 2022 – Mar 2023</div>
+          </div>
+          <p>
+            Led development of a React Native vendor management application for Android, focused on inventory workflows,
+            orders, and vendor communication.
+          </p>
+          <ul>
+            <li>Built the mobile app using React Native and Expo for daily operational use.</li>
+            <li>Reduced manual inventory tasks by around 50% through better workflow design.</li>
+            <li>Created modular reusable components and improved development speed by ~30%.</li>
+            <li>Integrated secure local storage and Context API for session management and data safety.</li>
+            <li>Added order processing and in-app communication features, improving adoption.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">JavaScript / React Developer — WebIsFree</div>
+              <div class="item-subtitle">Programming LMS (remote, part-time)</div>
+            </div>
+            <div class="date">Jan 2022 – Present</div>
+          </div>
+          <p>
+            Built educational content and product features for a programming LMS platform including tutorials,
+            blog content, and WordPress plugins integrated with React-based interfaces.
+          </p>
+          <ul>
+            <li>Created 15+ React.js video tutorials with 10K+ total views.</li>
+            <li>Wrote 30+ blog posts on JavaScript, TypeScript, and React topics.</li>
+            <li>Built and published WordPress plugins (OTP Auth, ticketing tools, and more).</li>
+            <li>Connected React frontends with WordPress core features for better usability.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">IT Manager & Webmaster — TarisGold</div>
+              <div class="item-subtitle">Multi-Vendor Gold Platform (on-site, full-time)</div>
+            </div>
+            <div class="date">Jun 2020 – Nov 2021</div>
+          </div>
+          <p>
+            Managed and developed a high-traffic online gold marketplace, improving performance, transaction flow,
+            and backend content operations.
+          </p>
+          <ul>
+            <li>Optimized WordPress infrastructure and improved page speed by ~45%.</li>
+            <li>Automated gold price updates using live API and reduced manual pricing errors by 80%+.</li>
+            <li>Customized plugins for secure checkout and product filtering to improve conversion.</li>
+            <li>Automated backend publishing flows and reduced admin time significantly.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Projects</h2>
+
+      <div class="projects-grid">
+
+        <div class="project-card featured">
+          <div class="project-top">
+            <div class="project-title-wrap">
+              <div class="item-title">ClubMate (Product Portfolio Entry)</div>
+              <div class="item-subtitle">Event-first companion matching app</div>
+
+              <div class="project-meta">
+                <span class="tag">React Native CLI</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Apify</span>
+                <span class="tag">Cloudinary</span>
+                <span class="tag">Berlin Focus</span>
+              </div>
+            </div>
+            <div class="date">Mobile Startup Project</div>
+          </div>
+
+          <p class="project-desc">
+            ClubMate helps users find people to attend events with, based on live event plans and mutual interest.
+            It combines event discovery, social matching, chat, and notifications in one product experience.
+          </p>
+
+          <div class="project-divider"></div>
+
+          <ul class="project-features">
+            <li>Event-based matching flow instead of classic swipe-only dating logic.</li>
+            <li>Real-time chat between matched users for fast coordination.</li>
+            <li>Notification flow for accepted requests and match updates.</li>
+            <li>Apify integration for event data collection and refresh.</li>
+            <li>Cloudinary used for low-cost image upload handling.</li>
+            <li>Prepared for future payments (PayPal / Google Wallet / cards).</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-title-wrap">
+              <div class="item-title">Ticket Support Plugin (WordPress)</div>
+              <div class="item-subtitle">Admin Panel • User Support Interface • SMS Verification</div>
+
+              <div class="project-meta">
+                <span class="tag">WordPress Plugin</span>
+                <span class="tag">PHP / WP Admin</span>
+                <span class="tag">SMS API</span>
+                <span class="tag">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="date">Plugin Project</div>
+          </div>
+
+          <p class="project-desc">
+            Custom support ticket plugin for WordPress with two connected experiences:
+            an admin-side ticket management panel inside the WordPress dashboard and a user-side support section on the website.
+          </p>
+
+          <div class="project-divider"></div>
+
+          <ul class="project-features">
+            <li>Admin panel for ticket listing, replies, status updates, and workflow control.</li>
+            <li>User-facing support interface embedded directly into the website.</li>
+            <li>SMS API integration for phone number validation and secure verification.</li>
+            <li>Mobile-based authentication logic to reduce fake requests.</li>
+            <li>Tailwind CSS styling for a modern and responsive UI.</li>
+            <li>Reusable UI components for easier maintenance and updates.</li>
+            <li>Scalable base for file attachments, priority levels, and auto-notifications.</li>
+            <li>Simple UX for non-technical website owners and support teams.</li>
+          </ul>
+        </div>
+
+        <div class="project-card compact">
+          <div class="project-top">
+            <div class="project-title-wrap">
+              <div class="item-title">GS1 / GTIN Admin Dashboard</div>
+              <div class="item-subtitle">React • Kendo UI • Redux • React Query</div>
+            </div>
+            <div class="date">Enterprise</div>
+          </div>
+          <p class="project-desc">
+            Enterprise dashboard for user management, code tracking, reporting, and secure admin operations with scalable frontend architecture.
+          </p>
+        </div>
+
+        <div class="project-card compact">
+          <div class="project-top">
+            <div class="project-title-wrap">
+              <div class="item-title">Vendor Management Mobile App</div>
+              <div class="item-subtitle">React Native • Expo • Android</div>
+            </div>
+            <div class="date">Mobile Product</div>
+          </div>
+          <p class="project-desc">
+            Multi-vendor operations app for inventory, order flow, and communication with practical business workflow support.
+          </p>
+        </div>
+
+        <div class="project-card compact">
+          <div class="project-top">
+            <div class="project-title-wrap">
+              <div class="item-title">Programming LMS + WordPress Plugins</div>
+              <div class="item-subtitle">React • WordPress • JavaScript / TypeScript</div>
+            </div>
+            <div class="date">EdTech</div>
+          </div>
+          <p class="project-desc">
+            Educational platform contributions including tutorials, blog content, and custom plugin development with React integrations.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Soft Skills & Interests</h2>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>Soft Skills</h3>
+          <ul class="soft-list">
+            <li>Social and communicative personality with friendly interaction style</li>
+            <li>Strong networking and relationship-building ability</li>
+            <li>Problem-solving mindset in technical and team situations</li>
+            <li>Responsibility and ownership in project delivery</li>
+            <li>Good collaboration with different teams and stakeholders</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h3>Interests</h3>
+          <ul class="interest-list">
+            <li>Basketball</li>
+            <li>Trekking / Hiking</li>
+            <li>Swimming</li>
+            <li>Psychology</li>
+          </ul>
+
+          <div class="music-box">
+            <p><strong>Arts & Music</strong></p>
+            <div class="chips">
+              <span class="chip">Guitar</span>
+              <span class="chip">Ney (Haft-Band)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Education</h2>
+
+      <div class="timeline">
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">Master’s in Data Science, AI</div>
+              <div class="item-subtitle">GISMA University of Applied Science</div>
+            </div>
+            <div class="date">Apr 2025 – Apr 2026</div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div>
+              <div class="item-title">Bachelor’s in Computer Engineering</div>
+              <div class="item-subtitle">University of Kurdistan</div>
+            </div>
+            <div class="date">Sep 2012 – Jul 2018</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Contact</h2>
+      <p style="margin:0; line-height:1.8;">
+        <strong>Email:</strong> <a href="mailto:masoud.mpy@gmail.com">masoud.mpy@gmail.com</a><br />
+        <strong>Phone:</strong> +49 157 55994405<br />
+        <strong>Location:</strong> Berlin, Germany
+      </p>
+    </section>
+
+    <!-- <div class="footer">
+      © <span id="year"></span> Masoud Piryaie Yarahmadi 
+    </div> -->
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
